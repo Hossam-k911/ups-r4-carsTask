@@ -1,0 +1,38 @@
+<section>
+  <div class="container">
+    <h2 class="text-center mt-5">Most popular cars rental deals</h2>
+
+    <div class="row justify-content-center">
+      <div
+        class="col-md-3"
+        *ngFor="
+          let car of carsList
+            | paginate
+              : {
+                  itemsPerPage: 7,
+                  currentPage: pageNumber,
+                  totalItems: carsList.length
+                }
+        "
+      >
+        <div class="card-item p-3 border-3">
+          <img class="w-100" src="assets/images/car.jpg" />
+          <div class="car-info">
+            <h4>
+              Name : {{ car.make }}
+              <br />
+              Model : {{ car.model }}
+              <br />
+              color : {{ car.color }}
+            </h4>
+                        
+            <button    [routerLink]="['/car',car.id]" class="btn btn-outline-primary w-100">Rent Now</button>
+          </div>
+        </div>
+      </div>
+      <pagination-controls
+        (pageChange)="pageNumber = $event"
+      ></pagination-controls>
+    </div>
+  </div>
+</section>
